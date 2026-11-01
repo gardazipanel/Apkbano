@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0F9688"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<title>HTML to APK</title>
+<style>
+:root{--bg:#F5F7FA;--card:#F0F5F4;--tx:#1A1C2E;--mu:#5B6172;--pr:#0F9688;--gr:#2E9E4F;--ln:#3A3F55;--bd:#dfe5e4;--er:#D32F2F;box-sizing:border-box}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12161c;--card:#1a2124;--tx:#eef2f5;--mu:#a2adbb;--ln:#7d8aa0;--bd:#2b3538}}
+:root[data-theme="dark"]{--bg:#12161c;--card:#1a2124;--tx:#eef2f5;--mu:#a2adbb;--ln:#7d8aa0;--bd:#2b3538}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,Roboto,"Segoe UI",sans-serif;max-width:520px;margin:auto;min-height:100vh}
+.hd{background:var(--pr);color:#fff;display:flex;align-items:center;gap:14px;padding:calc(env(safe-area-inset-top,0px) + 16px) 18px 16px;font-size:26px;font-weight:700}
+.lg{width:54px;height:54px;border-radius:14px;background:linear-gradient(#1bb3a2,#0e8a7d);border:1px solid rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;font-size:19px;position:relative;flex:none}
+.lg:after{content:"▼";position:absolute;bottom:3px;font-size:9px;color:#ffd400}
+.hd a{font-size:28px;padding:0 6px;line-height:1}
+.pg{padding:16px 16px calc(env(safe-area-inset-bottom,0px) + 28px)}
+.v{display:none}.v.on{display:block}
+.big{display:flex;align-items:center;gap:16px;width:100%;background:var(--card);border:2.5px solid var(--ln);border-radius:26px;padding:20px 16px;margin-bottom:14px;color:var(--tx);font:inherit;text-align:left}
+.big .i{width:80px;height:80px;border-radius:20px;background:var(--pr);color:#fff;display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:700;flex:none}
+.big b{display:block;font-size:21px;margin-bottom:2px}.big span{font-size:14px;color:var(--mu)}.big em{margin-left:auto;font-style:normal;font-size:28px;color:var(--pr)}
+.mo{font-size:15px;font-weight:700;color:var(--mu);margin:22px 4px 10px}
+.pill{display:block;width:100%;padding:18px;border:0;border-radius:20px;background:var(--pr);color:#fff;font-size:19px;font-weight:700;margin-bottom:12px}
+.pill.g{background:var(--mu)}.pill.o{background:transparent;color:var(--pr);border:2px solid var(--pr)}.pill:disabled{opacity:.5}
+.card{background:var(--card);border-radius:20px;padding:16px;margin-bottom:12px}
+h3{margin:0 0 10px;font-size:17px}.mu{color:var(--mu);font-size:13px;line-height:1.5}
+input[type=text],input[type=url],input[type=number]{width:100%;padding:13px;border-radius:12px;border:1.5px solid var(--bd);background:var(--bg);color:var(--tx);font-size:15px;margin-top:6px}
+input[type=file]{margin-top:8px;max-width:100%;font-size:13px}
+.seg{display:flex;gap:6px;margin-bottom:12px}.seg button,.ch button{flex:1;padding:11px 4px;border-radius:12px;border:2px solid var(--bd);background:var(--bg);color:var(--tx);font-size:13px;font-weight:600}
+.seg button.on,.ch button.on{border-color:var(--pr);background:var(--pr);color:#fff}
+.ch{display:flex;gap:6px;margin:8px 0}
+.sw{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}.sw i{width:38px;height:38px;border-radius:50%;border:3px solid transparent;display:block}.sw i.on{border-color:var(--tx)}
+.row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--bd);font-size:15px;gap:10px}.row:last-child{border:0}.row small{display:block;color:var(--mu);font-size:11px}
+.tg{position:relative;width:46px;height:26px;flex:none}.tg input{opacity:0;position:absolute;inset:0;width:100%;height:100%;margin:0;z-index:1}
+.tg u{position:absolute;inset:0;background:#b9c4c2;border-radius:13px;transition:.2s}.tg u:after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
+.tg input:checked+u{background:var(--pr)}.tg input:checked+u:after{left:23px}.tg input:disabled+u{opacity:.55}
+.pvbox{position:relative;width:190px;height:340px;border-radius:22px;margin:8px auto;overflow:hidden;border:3px solid var(--ln);background:#111827}
+.pt{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:18px}.pt img{width:64px;height:64px;border-radius:15px}.pt b{margin-top:10px;font-size:16px;text-shadow:0 1px 5px rgba(0,0,0,.35)}
+#lg{width:64px;height:64px;border-radius:16px;margin-top:8px;display:none}
+.app{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--bd)}.app:last-child{border:0}.app img{width:46px;height:46px;border-radius:11px;flex:none}.app div{flex:1;min-width:0}.app b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb{display:inline-block;padding:8px 14px;margin:8px 6px 0 0;border-radius:10px;border:0;background:var(--pr);color:#fff;font-size:13px;font-weight:600}.sb.o{background:transparent;color:var(--pr);border:1.5px solid var(--pr)}.sb.r{background:var(--er)}
+.er{color:var(--er)}.ok{color:var(--gr);font-weight:700}
+ol{margin:0;padding-left:20px;line-height:1.8;font-size:14px;color:var(--mu)}
+</style>
+</head>
+<body>
+<div class="hd" id="hd"></div>
+<div class="pg">
+
+<div class="v on" id="home">
+<div class="card" id="tcard"><div class="mu" id="ts">Template tayar ho raha hai...</div>
+<div id="tb" style="display:none"><div class="mu" style="margin-top:6px">Sirf pehli baar: apni <b>HTML-to-APK.apk</b> file chunein (yeh sirf aapke phone mein save hoti hai).</div><input type="file" id="tp"></div></div>
+<button class="big" data-t="web"><div class="i" style="background:#2196F3;font-size:30px">🌐</div><div><b>Website URL to APK</b><span>Convert website link to Android APK</span></div><em>›</em></button>
+<button class="big" data-t="html"><div class="i">&lt;/&gt;</div><div><b>HTML File to APK</b><span>Convert HTML file to Android APK</span></div><em>›</em></button>
+<button class="big" data-t="zip"><div class="i" style="background:var(--gr)">ZIP</div><div><b>ZIP File to APK</b><span>Convert ZIP (website) to Android APK</span></div><em>›</em></button>
+<div class="card"><h3>📲 Offline app</h3><div class="mu">Chrome menu (⋮) → <b>Install app</b> ya <b>Add to Home screen</b>. Ek baar khulne ke baad yeh bina internet ke chalta hai. Template aur banayi hui apps isi phone mein save rehti hain.</div></div>
+<div class="mo">MORE</div>
+<button class="pill" id="goApps">My Apps (0)</button>
+<button class="pill g" id="goHow">How to Use</button>
+</div>
+
+<div class="v" id="apps"><div class="card" id="applist"></div></div>
+<div class="v" id="how"><div class="card"><ol><li>Source chunein: Website URL, HTML ya ZIP, phir file ya link dein.</li><li>App ka logo, naam aur version dein.</li><li>App ke naam ki jagah chunein: left, center ya right.</li><li>Preview dekhein, splash (image, video ya color), light/dark mode, orientation aur music chunein.</li><li>Permissions chunein aur Build APK dabayein.</li><li>Install ya Download dabayein.</li></ol></div></div>
+
+<div class="v" id="wiz">
+<div class="w" id="w1"><div class="seg" id="seg"><button data-t="web">Website URL</button><button data-t="html">HTML</button><button data-t="zip">ZIP</button></div>
+<div class="card"><div id="fb"><div class="mu" id="fh"></div><input type="file" id="file"><div class="mu" id="fn" style="margin-top:6px"></div></div><div id="ub"><div class="mu">Website ka link</div><input type="url" id="url" placeholder="https://example.com"></div></div></div>
+
+<div class="w" id="w2"><div class="card"><h3>Choose logo for your app</h3><input type="file" id="logo" accept="image/*"><img id="lg" alt=""><button class="sb o" id="rm" style="display:none">Remove icon image</button>
+<div class="mu" style="margin-top:12px">Ya icon color (agar image nahi)</div><div class="sw" id="sw"></div></div>
+<div class="card"><h3>App details</h3><div class="mu">App name</div><input type="text" id="name" value="My App">
+<div style="display:flex;gap:8px"><div style="flex:1"><div class="mu" style="margin-top:10px">Version name</div><input type="text" id="vn" value="1.0"></div><div style="flex:1"><div class="mu" style="margin-top:10px">Version code</div><input type="number" id="vc" value="1" min="1"></div></div>
+<div class="mu" style="margin-top:10px">Package name (khud ban jata hai)</div><input type="text" id="pkg"></div></div>
+
+<div class="w" id="w3"><div class="card"><h3>App name ki jagah</h3><div class="mu">Splash par naam aur icon kahan dikhein?</div><div class="ch" id="al"><button data-v="left">Left</button><button data-v="center" class="on">Center</button><button data-v="right">Right</button></div><div class="pvbox"></div></div></div>
+
+<div class="w" id="w4"><div class="card"><h3>Preview</h3><div class="pvbox"></div>
+<div class="mu" style="margin-top:6px">Splash screen</div><div class="ch" id="spt"><button data-v="none" class="on">None</button><button data-v="color">Color</button><button data-v="image">Image</button><button data-v="video">Video</button></div>
+<div id="spc" style="display:none"><div class="sw" id="sw2"></div></div>
+<div id="spi" style="display:none"><div class="mu">Gallery se image chunein</div><input type="file" id="spif" accept="image/*"></div>
+<div id="spv" style="display:none"><div class="mu">Gallery se video chunein (max 25 MB)</div><input type="file" id="spvf" accept="video/*"></div></div>
+<div class="card"><h3>Mode</h3><div class="mu">Dono par tick = phone ke hisaab se. Ek par tick = sirf wohi.</div>
+<div class="row">Light<span class="tg"><input type="checkbox" id="m_l" checked><u></u></span></div><div class="row">Dark<span class="tg"><input type="checkbox" id="m_d" checked><u></u></span></div></div>
+<div class="card"><h3>Screen orientation</h3><div class="ch" id="ori"><button data-v="portrait">Portrait</button><button data-v="auto" class="on">Auto</button><button data-v="landscape">Landscape</button></div></div>
+<div class="card"><h3>Background music (optional)</h3><input type="file" id="mus" accept="audio/*"><div class="mu" style="margin-top:6px">Loop mein chalta hai, pehli touch par shuru hota hai (max 15 MB).</div></div></div>
+
+<div class="w" id="w5"><div class="card"><h3>Permissions</h3>
+<div class="row">Internet<span class="tg"><input type="checkbox" checked disabled><u></u></span></div>
+<div class="row">Camera<span class="tg"><input type="checkbox" id="p_cam"><u></u></span></div>
+<div class="row">Microphone<span class="tg"><input type="checkbox" id="p_mic"><u></u></span></div>
+<div class="row">Location (GPS)<span class="tg"><input type="checkbox" id="p_loc"><u></u></span></div>
+<div class="row">Gallery / file upload<span class="tg"><input type="checkbox" id="p_gal" checked><u></u></span></div>
+<div class="row">Vibration<span class="tg"><input type="checkbox" id="p_vib"><u></u></span></div>
+</div>
+<div class="card"><h3>Lock aur features</h3>
+<div class="row">PIN lock<span class="tg"><input type="checkbox" id="a_pin"><u></u></span></div>
+<input type="text" id="pin" inputmode="numeric" maxlength="8" placeholder="PIN (4-8 number)" style="display:none">
+<div class="row">Fullscreen (status bar hide)<span class="tg"><input type="checkbox" id="p_full"><u></u></span></div>
+<div class="row">Screen on rakhein<span class="tg"><input type="checkbox" id="a_awk"><u></u></span></div>
+<div class="row">Zoom band<span class="tg"><input type="checkbox" id="a_zm"><u></u></span></div>
+<div class="row">Text select band<span class="tg"><input type="checkbox" id="a_sel"><u></u></span></div></div>
+<div class="card" id="res" style="display:none;text-align:center"><div style="font-size:42px">✅</div><h3 class="ok">App tayar hai!</h3><div class="mu" id="dn"></div>
+<button class="pill" id="inst" style="margin-top:12px">Install now</button><button class="pill o" id="dl">Download (phone mein save)</button><div class="mu">Install ke waqt 'Allow from this source' on karna parta hai. APK My Apps mein save ho gayi hai.</div></div></div>
+
+<button class="pill" id="nx" style="margin-top:6px"></button>
+<div class="mu" id="st" style="text-align:center"></div>
+</div>
+</div>
+
+<script>
+const u8=(...a)=>Uint8Array.from(a),enc=new TextEncoder();
+const cat=(...p)=>{let n=0;for(const x of p)n+=x.length;const o=new Uint8Array(n);let i=0;for(const x of p){o.set(x,i);i+=x.length}return o};
+const le=(n,b)=>{const o=new Uint8Array(b);for(let i=0;i<b;i++)o[i]=Math.floor(n/2**(8*i))&255;return o};
+const rd=(d,o,b)=>{let n=0;for(let i=b-1;i>=0;i--)n=n*256+d[o+i];return n};
+const CT=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;CT[n]=c>>>0}
+const crc=d=>{let c=-1;for(let i=0;i<d.length;i++)c=CT[(c^d[i])&255]^(c>>>8);return(c^-1)>>>0};
+const lp=(...p)=>{const b=cat(...p);return cat(le(b.length,4),b)};
+const sha=async d=>new Uint8Array(await crypto.subtle.digest('SHA-256',d));
+async function inflate(raw){const s=new Blob([raw]).stream().pipeThrough(new DecompressionStream('deflate-raw'));return new Uint8Array(await new Response(s).arrayBuffer())}
+function readZip(d){let e=d.length-22;while(rd(d,e,4)!==0x06054b50)e--;const n=rd(d,e+10,2);let p=rd(d,e+16,4);const L=[];
+for(let i=0;i<n;i++){const nl=rd(d,p+28,2),el=rd(d,p+30,2),cl=rd(d,p+32,2),lo=rd(d,p+42,4);
+const name=new TextDecoder().decode(d.subarray(p+46,p+46+nl)),cs=rd(d,p+20,4),ds=lo+30+rd(d,lo+26,2)+rd(d,lo+28,2);
+L.push({name,m:rd(d,p+10,2),cr:rd(d,p+16,4),us:rd(d,p+24,4),raw:d.subarray(ds,ds+cs)});p+=46+nl+el+cl}return L}
+function writeZip(E){const lh=[],cd=[];let pos=0;
+for(const e of E){const nm=enc.encode(e.name);const pad=e.m===0?(4-((pos+30+nm.length)%4))%4:0;
+const h=cat(le(0x04034b50,4),le(20,2),le(0,2),le(e.m,2),le(0,2),le(0x21,2),le(e.cr,4),le(e.raw.length,4),le(e.us,4),le(nm.length,2),le(pad,2),nm,new Uint8Array(pad));
+cd.push(cat(le(0x02014b50,4),le(20,2),le(20,2),le(0,2),le(e.m,2),le(0,2),le(0x21,2),le(e.cr,4),le(e.raw.length,4),le(e.us,4),le(nm.length,2),le(0,2),le(0,2),le(0,2),le(0,2),le(0,4),le(pos,4),nm));
+lh.push(h,e.raw);pos+=h.length+e.raw.length}
+return{s1:cat(...lh),cd:cat(...cd),n:E.length}}
+function axml(d0,o){const d=d0.slice(),dv=new DataView(d.buffer);
+const sc=dv.getUint32(16,true),ss=dv.getUint32(28,true),psz=dv.getUint32(12,true);if(dv.getUint32(24,true)&256)throw Error('utf8 pool');
+const S=[];for(let i=0;i<sc;i++){const p=8+ss+dv.getUint32(36+4*i,true),n=dv.getUint16(p,true);S.push(new TextDecoder('utf-16le').decode(d.subarray(p+2,p+2+2*n)))}
+const ix=s=>S.indexOf(s);let K=-1;if((o.orient!=null)){S.push('screenOrientation');K=S.length-1}
+S[ix('com.h2a.app00000000')]=o.pkg;S[ix('APPLABELPLACEHOLDER0123456789X')]=o.label;S[ix('1.0')]=o.vName;
+const up=ix('uses-permission'),man=ix('manifest'),vc=ix('versionCode'),rest=d.subarray(8+psz),out=[];
+let p=0,drop=false,afterNet=false,tpl=null;
+const act=ix('activity'),app=ix('application'),thm=ix('theme');
+while(p<rest.length){const t=rd(rest,p,2),sz=rd(rest,p+4,4);let c=rest.slice(p,p+sz);p+=sz;
+if(t===0x180&&(o.orient!=null)){const ids=c.subarray(8),n=ids.length/4,r=new Uint8Array(8+4*(K+1));r.set(c.subarray(0,8));r.set(ids,8);r.set(le(0x0101001e,4),8+4*K);r.set(le(r.length,4),4);c=r}
+if(t===0x102&&(o.orient!=null)&&rd(c,20,4)===act){const ac=rd(c,28,2),RM=rest.subarray(rest.length-0);let at=36,pos=ac;const ns=rd(c,36+8*0,4);
+for(let i=0;i<ac;i++){const nm=rd(c,36+i*20+4,4);if(S[nm]==='configChanges'){pos=i;break}}
+const a=cat(le(rd(c,36,4),4),le(K,4),le(0xffffffff,4),le(8,2),u8(0,0x10),le(o.orient,4));
+c=cat(c.subarray(0,36+pos*20),a,c.subarray(36+pos*20));c.set(le(c.length,4),4);c.set(le(ac+1,2),28)}
+if(t===0x102&&o.full&&rd(c,20,4)===app)for(let i=0;i<rd(c,28,2);i++)if(rd(c,36+i*20+4,4)===thm){c.set(u8(1),36+i*20+15);c.set(le(0x01030007,4),36+i*20+16)}
+if(t===0x102){const nm=rd(c,20,4);
+if(nm===up){const name=S[rd(c,44,4)];if(name in o.perm&&!o.perm[name]){drop=true;continue}if(name==='android.permission.INTERNET'){tpl=c;afterNet=true}}
+if(nm===man)for(let i=0;i<rd(c,28,2);i++)if(rd(c,36+i*20+4,4)===vc)c.set(le(o.vCode,4),36+i*20+16)}
+if(t===0x103&&rd(c,20,4)===up){if(drop){drop=false;continue}
+if(afterNet){afterNet=false;out.push(c);for(const n of o.add){S.push(n);const k=S.length-1,a=tpl.slice();a.set(le(k,4),44);a.set(le(k,4),52);out.push(a,c)}continue}}
+out.push(c)}
+const parts=[],offs=[];let q=0;for(const s of S){offs.push(q);const b=new Uint8Array(4+2*s.length),v=new DataView(b.buffer);v.setUint16(0,s.length,true);for(let i=0;i<s.length;i++)v.setUint16(2+2*i,s.charCodeAt(i),true);parts.push(b);q+=b.length}
+const sd=cat(...parts),sp=(4-sd.length%4)%4,hl=28+4*S.length;
+const pool=cat(le(1,2),le(28,2),le(hl+sd.length+sp,4),le(S.length,4),le(0,4),le(0,4),le(hl,4),le(0,4),...offs.map(x=>le(x,4)),sd,new Uint8Array(sp));
+const body=cat(pool,...out);return cat(le(3,2),le(8,2),le(body.length+8,4),body)}
+const dl=n=>n<128?u8(n):n<256?u8(0x81,n):u8(0x82,n>>8,n&255);
+const D=(t,...p)=>{const b=cat(...p);return cat(u8(t),dl(b.length),b)};
+const b64=a=>btoa(String.fromCharCode(...a)),ub64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function getKey(st){const P={name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'};let j=st.get();
+if(j){j=JSON.parse(j);return{priv:await crypto.subtle.importKey('jwk',j.jwk,P,false,['sign']),cert:ub64(j.cert),spki:ub64(j.spki)}}
+const kp=await crypto.subtle.generateKey({...P,modulusLength:2048,publicExponent:u8(1,0,1)},true,['sign']);
+const spki=new Uint8Array(await crypto.subtle.exportKey('spki',kp.publicKey)),jwk=await crypto.subtle.exportKey('jwk',kp.privateKey);
+const alg=D(0x30,u8(6,9,0x2a,0x86,0x48,0x86,0xf7,0x0d,1,1,0x0b),u8(5,0)),nm=D(0x30,D(0x31,D(0x30,u8(6,3,0x55,4,3),D(0x0c,enc.encode('App'))))),tm=s=>D(0x17,enc.encode(s));
+const tbs=D(0x30,u8(0xa0,3,2,1,2),D(2,u8(1),crypto.getRandomValues(new Uint8Array(7))),alg,nm,D(0x30,tm('240101000000Z'),tm('490101000000Z')),nm,spki);
+const sig=new Uint8Array(await crypto.subtle.sign('RSASSA-PKCS1-v1_5',kp.privateKey,tbs)),cert=D(0x30,tbs,alg,D(3,u8(0),sig));
+st.set(JSON.stringify({jwk,cert:b64(cert),spki:b64(spki)}));return{priv:kp.privateKey,cert,spki}}
+async function signApk(z,k){const eo=off=>cat(le(0x06054b50,4),le(0,2),le(0,2),le(z.n,2),le(z.n,2),le(z.cd.length,4),le(off,4),le(0,2));
+const dg=[];for(const s of[z.s1,z.cd,eo(z.s1.length)])for(let i=0;i<s.length;i+=1048576){const c=s.subarray(i,Math.min(i+1048576,s.length));dg.push(await sha(cat(u8(0xa5),le(c.length,4),c)))}
+const top=await sha(cat(u8(0x5a),le(dg.length,4),...dg)),algo=le(0x0103,4);
+const sd=cat(lp(lp(algo,lp(top))),lp(lp(k.cert)),lp());
+const sig=new Uint8Array(await crypto.subtle.sign('RSASSA-PKCS1-v1_5',k.priv,sd));
+const val=lp(lp(lp(sd),lp(lp(algo,lp(sig))),lp(k.spki))),pair=cat(le(val.length+4,8),le(0x7109871a,4),val);
+const blk=cat(le(pair.length+24,8),pair,le(pair.length+24,8),enc.encode('APK Sig Block 42'));
+return cat(z.s1,blk,z.cd,eo(z.s1.length+blk.length))}
+async function buildApk(o){const E=readZip(o.template),out=[],st=(n,b)=>({name:n,m:0,cr:crc(b),us:b.length,raw:b});
+for(const e of E){if(e.name==='AndroidManifest.xml'){const m=e.m?await inflate(e.raw):e.raw;out.push(st(e.name,axml(m,o)))}
+else if(e.name==='res/RJ.png')out.push(st(e.name,o.icon));else out.push(e)}
+for(const k in o.www)out.push(st('assets/www/'+k,o.www[k]));
+if(o.config)out.push(st('assets/config.json',enc.encode(JSON.stringify(o.config))));
+return signApk(writeZip(out),o.key)}
+if(typeof module!=='undefined')module.exports={buildApk,getKey,readZip,inflate};
+
+const $=id=>document.getElementById(id),Q=s=>document.querySelectorAll(s);
+const idb=()=>new Promise((ok,no)=>{const r=indexedDB.open('apkmk',1);r.onupgradeneeded=()=>r.result.createObjectStore('k');r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)});
+async function idbGet(k){try{const d=await idb();return await new Promise(r=>{const q=d.transaction('k').objectStore('k').get(k);q.onsuccess=()=>r(q.result);q.onerror=()=>r()})}catch(e){}}
+async function idbSet(k,v){try{const d=await idb();await new Promise(r=>{const t=d.transaction('k','readwrite');t.objectStore('k').put(v,k);t.oncomplete=r;t.onerror=r})}catch(e){}}
+let mem=null;const store={get:()=>{try{return localStorage.getItem('apkkey')}catch(e){return mem}},set:v=>{mem=v;try{localStorage.setItem('apkkey',v)}catch(e){}}};
+const COLS=['#0F9688','#2196F3','#4CAF50','#9C27B0','#E91E63','#FF9800','#F44336','#212121'];
+const S={t:'html',color:'#0F9688',img:null,al:'center',sp:'none',spc:'#0F9688',spi:null,spv:null,ori:'auto',cur:null,pe:false};
+let TPL=null,step=1,APPS=[],view='home';
+function head(t,back){$('hd').innerHTML=back?'<a id="hb">←</a><span>'+t+'</span>':'<div class="lg">&lt;/&gt;</div><span>HTML to APK</span>';if(back)$('hb').onclick=()=>view==='wiz'&&step>1?(step--,go()):nav('home')}
+function nav(v){view=v;Q('.v').forEach(x=>x.classList.toggle('on',x.id===v));head(v==='apps'?'My Apps':v==='how'?'How to Use':v==='wiz'?'Step '+step+'/5':'',v!=='home');scrollTo(0,0);if(v==='apps')paint()}
+function ready(){$('ts').innerHTML='<span class="ok">✅ Template tayar hai</span>';$('tb').style.display='none'}
+(async()=>{head('',0);const t=await idbGet('tpl');if(t){TPL=t;ready()}else{$('ts').textContent='Template abhi nahi hai.';$('tb').style.display='block'}APPS=(await idbGet('apps'))||[];cnt()})();
+const cnt=()=>$('goApps').textContent='My Apps ('+APPS.length+')';
+$('tp').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const z=readZip(new Uint8Array(await f.arrayBuffer())),t=z.find(x=>x.name==='assets/template.apk');if(!t)throw 0;TPL=t.m?await inflate(t.raw):t.raw.slice();await idbSet('tpl',TPL);ready()}catch(_){$('ts').innerHTML='<span class="er">❌ Yeh sahi file nahi hai, HTML-to-APK.apk chunein</span>'}};
+$('goApps').onclick=()=>nav('apps');$('goHow').onclick=()=>nav('how');
+const fmt=d=>{const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],p=n=>String(n).padStart(2,'0');return p(d.getDate())+' '+m[d.getMonth()]+' '+d.getFullYear()+', '+p(d.getHours())+':'+p(d.getMinutes())};
+function save(name,b){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([b],{type:'application/vnd.android.package-archive'}));a.download=(name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'app')+'.apk';document.body.appendChild(a);a.click();a.remove()}
+function paint(){cnt();const b=$('applist');b.innerHTML=APPS.length?'':'<div class="mu">Abhi koi app nahi bani.</div>';
+APPS.forEach((a,i)=>{const d=document.createElement('div');d.className='app';d.innerHTML='<img src="'+a.icon+'" alt=""><div><b></b><span class="mu">'+fmt(new Date(a.time))+' · '+Math.round(a.bytes.length/1024)+' KB</span><br><button class="sb">Install</button><button class="sb o">Download</button><button class="sb r">Delete</button></div>';
+d.querySelector('b').textContent=a.name;const bt=d.querySelectorAll('button');bt[0].onclick=bt[1].onclick=()=>save(a.name,a.bytes);bt[2].onclick=async()=>{APPS.splice(i,1);await idbSet('apps',APPS);paint()};b.appendChild(d)})}
+function setType(t){S.t=t;Q('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('fb').style.display=t==='web'?'none':'block';$('ub').style.display=t==='web'?'block':'none';
+$('fh').textContent=t==='zip'?'Sirf .zip file chunein (andar index.html zaroor ho)':'Sirf .html file chunein';$('file').accept=t==='zip'?'.zip':'.html,.htm';$('file').value='';$('fn').textContent=''}
+Q('.big').forEach(b=>b.onclick=()=>{if(!TPL)return $('ts').innerHTML='<span class="er">Pehle template chunein</span>';step=1;setType(b.dataset.t);$('st').textContent='';$('res').style.display='none';go()});
+Q('#seg button').forEach(b=>b.onclick=()=>setType(b.dataset.t));
+$('file').onchange=e=>{const f=e.target.files[0];$('fn').textContent=f?'File: '+f.name:''};
+function chips(id,key,cb){Q('#'+id+' button').forEach(b=>b.onclick=()=>{S[key]=b.dataset.v;Q('#'+id+' button').forEach(x=>x.classList.toggle('on',x===b));cb&&cb();pv()})}
+chips('al','al');chips('ori','ori');chips('spt','sp',()=>{$('spc').style.display=S.sp==='color'?'block':'none';$('spi').style.display=S.sp==='image'?'block':'none';$('spv').style.display=S.sp==='video'?'block':'none'});
+function swatches(id,get,set){COLS.forEach(c=>{const i=document.createElement('i');i.style.background=c;i.className=get()===c?'on':'';i.onclick=()=>{set(c);Q('#'+id+' i').forEach(x=>x.classList.toggle('on',x===i));pv()};$(id).appendChild(i)})}
+swatches('sw',()=>S.color,c=>S.color=c);swatches('sw2',()=>S.spc,c=>S.spc=c);
+$('logo').onchange=e=>{const f=e.target.files[0];if(!f)return;const i=new Image();i.onload=()=>{S.img=i;$('lg').src=i.src;$('lg').style.display='block';$('rm').style.display='inline-block';pv()};i.src=URL.createObjectURL(f)};
+$('rm').onclick=()=>{S.img=null;$('lg').style.display='none';$('rm').style.display='none';$('logo').value='';pv()};
+$('spif').onchange=e=>{const f=e.target.files[0];S.spi=f||null;S.spiu=f?URL.createObjectURL(f):null;pv()};
+$('spvf').onchange=e=>{const f=e.target.files[0];S.spv=f||null;S.spvu=f?URL.createObjectURL(f):null;pv()};
+$('a_pin').onchange=e=>$('pin').style.display=e.target.checked?'block':'none';
+['m_l','m_d'].forEach(i=>$(i).onchange=()=>{if(!$('m_l').checked&&!$('m_d').checked)$(i).checked=true});
+const nm=()=>$('name').value.trim()||'My App',slug=s=>s.toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,12)||'app';
+function pkgFor(n){const k='pk_'+slug(n);let v;try{v=localStorage.getItem(k)}catch(e){}if(!v){v='com.app.'+slug(n)+Math.random().toString(36).slice(2,6).replace(/^[0-9]/,'x');try{localStorage.setItem(k,v)}catch(e){}}return v}
+$('pkg').oninput=()=>S.pe=true;$('name').oninput=()=>{if(!S.pe)$('pkg').value=pkgFor(nm());pv()};$('pkg').value=pkgFor('My App');
+function icon(sz){const c=document.createElement('canvas');c.width=c.height=sz;const x=c.getContext('2d'),m=S.img;
+if(m){const s=Math.min(m.width,m.height);x.drawImage(m,(m.width-s)/2,(m.height-s)/2,s,s,0,0,sz,sz)}
+else{x.fillStyle=S.color;x.fillRect(0,0,sz,sz);x.fillStyle='#fff';x.font='bold '+sz*.5+'px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(nm()[0].toUpperCase(),sz/2,sz/2)}return c}
+function fg(){if(S.sp!=='color')return'#fff';const n=parseInt(S.spc.slice(1),16),l=(.299*(n>>16)+.587*((n>>8)&255)+.114*(n&255));return l>150?'#111':'#fff'}
+const AI={left:'flex-start',center:'center',right:'flex-end'};
+function pv(){const u=icon(96).toDataURL();Q('.pvbox').forEach(b=>{b.innerHTML='';b.style.background=S.sp==='color'?S.spc:'#111827';
+if(S.sp==='image'&&S.spiu)b.style.background='url('+S.spiu+') center/cover';
+if(S.sp==='video'&&S.spvu){const v=document.createElement('video');v.src=S.spvu;v.muted=true;v.loop=true;v.autoplay=true;v.setAttribute('playsinline','');v.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover';b.appendChild(v)}
+const t=document.createElement('div');t.className='pt';t.style.alignItems=AI[S.al];t.style.textAlign=S.al;t.style.color=fg();t.innerHTML='<img src="'+u+'" alt=""><b></b>';t.querySelector('b').textContent=nm();b.appendChild(t)})}
+function go(){view='wiz';nav('wiz');Q('.w').forEach(w=>w.style.display=w.id==='w'+step?'block':'none');$('nx').textContent=step===5?'Build APK':'Next';$('nx').style.display=$('res').style.display==='block'&&step===5?'none':'block';if(step>=3)pv()}
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+function snippet(C){return `<meta name="color-scheme" content="${C.cs}"><style>${C.sel?'*{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}input,textarea{-webkit-user-select:text;user-select:text}':''}</style><script>(function(){var C=${JSON.stringify(C).replace(/</g,'\\u003c')},H=document.documentElement;window.__snip=1;
+if(C.th){H.setAttribute("data-theme",C.th);H.className+=" "+C.th}
+function ov(){var d=document.createElement("div");d.style.cssText="position:fixed;left:0;top:0;right:0;bottom:0;z-index:2147483647;overflow:hidden;font-family:sans-serif;color:"+C.fg;H.appendChild(d);return d}
+function fin(){window.__ready=1;if(window.__go)window.__go()}
+function pin(){var d=ov();d.style.cssText+=";background:#111827;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center";d.innerHTML=\'<div style="font-size:20px;margin-bottom:14px">🔒 PIN dalein</div><input id=_p type=password inputmode=numeric style="font-size:24px;text-align:center;width:180px;padding:10px;border-radius:10px;border:0"><button id=_b style="margin-top:14px;padding:10px 28px;font-size:16px;border:0;border-radius:10px">Open</button><div id=_e style="margin-top:10px;color:#fca5a5;height:20px"></div>\';d.querySelector("#_b").onclick=function(){if(d.querySelector("#_p").value===C.pin){d.parentNode.removeChild(d);fin()}else d.querySelector("#_e").textContent="Galat PIN"}}
+function after(){if(C.pin)pin();else fin()}
+function splash(){var S=C.sp;if(!S){after();return}var d=ov(),n=0;d.style.background=S.t=="color"?S.c:"#111827";if(S.t=="image")d.style.background="url("+S.f+") center/cover no-repeat";
+function end(){if(n++)return;if(d.parentNode)d.parentNode.removeChild(d);after()}
+if(S.t=="video"){var v=document.createElement("video");v.src=S.f;v.muted=true;v.autoplay=true;v.setAttribute("playsinline","");v.style.cssText="position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover";d.appendChild(v);v.onended=end;v.onerror=end;setTimeout(end,8000)}else setTimeout(end,2500);
+var t=document.createElement("div");t.style.cssText="position:absolute;left:0;top:0;right:0;bottom:0;display:flex;flex-direction:column;justify-content:center;padding:32px;align-items:"+C.ai+";text-align:"+C.al;
+t.innerHTML=\'<img src="\'+C.icon+\'" style="width:96px;height:96px;border-radius:22px"><div style="font-size:24px;font-weight:700;margin-top:14px;text-shadow:0 1px 6px rgba(0,0,0,.35)">\'+C.name+"</div>";d.appendChild(t)}
+splash();
+if(C.sel)document.addEventListener("contextmenu",function(e){e.preventDefault()});
+document.addEventListener("DOMContentLoaded",function(){if(!C.zm)return;var m=document.querySelector("meta[name=viewport]");if(!m){m=document.createElement("meta");m.name="viewport";document.head.appendChild(m)}m.content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"});
+if(C.awk){var w=function(){try{navigator.wakeLock&&navigator.wakeLock.request("screen").catch(function(){})}catch(e){}};w();document.addEventListener("visibilitychange",w)}
+if(C.mus){var a=new Audio(C.mus);a.loop=true;a.volume=.6;var p=function(){a.play().catch(function(){})};p();["touchstart","click"].forEach(function(ev){document.addEventListener(ev,function f(){p();document.removeEventListener(ev,f)})});document.addEventListener("visibilitychange",function(){document.hidden?a.pause():p()})}
+})();<\/script>`}
+const ext=(f,d)=>(f.name.split('.').pop()||d).toLowerCase().replace(/[^a-z0-9]/g,'')||d;
+async function build(){const st=$('st'),say=t=>{st.textContent=t;return new Promise(r=>setTimeout(r,30))};
+const name=nm(),www={},tx=new TextDecoder(),C={name:esc(name),icon:icon(128).toDataURL('image/png'),al:S.al,ai:AI[S.al],fg:fg(),pin:$('a_pin').checked?$('pin').value:'',awk:$('a_awk').checked,zm:$('a_zm').checked,sel:$('a_sel').checked,cs:'light dark',th:'',sp:null,mus:''};
+const L=$('m_l').checked,D=$('m_d').checked;if(L&&!D){C.cs='light';C.th='light'}if(D&&!L){C.cs='dark';C.th='dark'}
+await say('Template tayar ho raha hai...');
+if(S.sp==='color')C.sp={t:'color',c:S.spc};
+if(S.sp==='image'){const f=S.spi;if(!f)throw Error('Splash image chunein');const n='_splash.'+ext(f,'jpg');www[n]=new Uint8Array(await f.arrayBuffer());C.sp={t:'image',f:n}}
+if(S.sp==='video'){const f=S.spv;if(!f)throw Error('Splash video chunein');if(f.size>25e6)throw Error('Video 25 MB se chhoti rakhein');const n='_splash.'+ext(f,'mp4');www[n]=new Uint8Array(await f.arrayBuffer());C.sp={t:'video',f:n}}
+const mf=$('mus').files[0];if(mf){if(mf.size>15e6)throw Error('Music 15 MB se chhota rakhein');const n='_bg.'+ext(mf,'mp3');www[n]=new Uint8Array(await mf.arrayBuffer());C.mus=n}
+if(S.t==='web'){const u=$('url').value.trim();
+www['index.html']=enc.encode('<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(name)+'</title></head><body style="font-family:sans-serif;text-align:center;padding:40px">⏳<script>window.__go=function(){if(navigator.onLine)location.replace('+JSON.stringify(u).replace(/</g,'\\u003c')+');else document.body.innerHTML=\'📡 Internet nahi hai<br><br><button onclick="__go()" style="padding:10px 24px;font-size:16px">Dobara try karein</button>\'};if(!window.__snip||window.__ready)__go()<\/script></body></html>')}
+else{const f=$('file').files[0],b=new Uint8Array(await f.arrayBuffer());
+if(S.t==='html')www['index.html']=b;else{const z=readZip(b).filter(e=>!e.name.endsWith('/')&&!e.name.startsWith('__MACOSX')),tops=new Set(z.map(e=>e.name.split('/')[0])),pre=tops.size===1&&z.every(e=>e.name.includes('/'))?[...tops][0]+'/':'';
+for(const e of z)www[e.name.slice(pre.length)]=e.m?await inflate(e.raw):e.raw.slice();if(!www['index.html'])throw Error('ZIP ke andar index.html nahi mili')}}
+await say('Aap ki file andar daali ja rahi hai...');
+{let h=tx.decode(www['index.html']);const s=snippet(C);h=/<head[^>]*>/i.test(h)?h.replace(/<head[^>]*>/i,m=>m+s):s+h;www['index.html']=enc.encode(h)}
+const ic=new Uint8Array(await new Promise(r=>icon(192).toBlob(b=>b.arrayBuffer().then(r),'image/png')));
+await say('APK sign ho rahi hai... (pehli baar 10-20 second)');
+const key=await getKey(store),A='android.permission.',add=[];
+if($('p_vib').checked)add.push(A+'VIBRATE');
+const apk=await buildApk({template:TPL,pkg:$('pkg').value.trim().toLowerCase(),label:name,vName:$('vn').value||'1.0',vCode:parseInt($('vc').value)||1,orient:S.ori==='portrait'?1:S.ori==='landscape'?0:null,full:false,config:{internet:true,camera:$('p_cam').checked,mic:$('p_mic').checked,location:$('p_loc').checked,gallery:$('p_gal').checked,fullscreen:$('p_full').checked,landscape:S.ori==='landscape'},
+perm:{[A+'CAMERA']:$('p_cam').checked,[A+'RECORD_AUDIO']:$('p_mic').checked,[A+'MODIFY_AUDIO_SETTINGS']:$('p_mic').checked,[A+'ACCESS_FINE_LOCATION']:$('p_loc').checked,[A+'ACCESS_COARSE_LOCATION']:$('p_loc').checked},add,www,icon:ic,key});
+S.cur={name,bytes:apk,time:Date.now(),icon:icon(96).toDataURL('image/png')};APPS.unshift(S.cur);await idbSet('apps',APPS);cnt()}
+$('nx').onclick=async()=>{const st=$('st');st.textContent='';
+if(step===1){if(S.t==='web'){if(!/^https?:\/\//.test($('url').value.trim()))return st.textContent='❌ Link https:// se shuru karein'}else if(!$('file').files[0])return st.textContent='❌ File nahi mili'}
+if(step===2){if(!/^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)+$/.test($('pkg').value.trim().toLowerCase()))return st.textContent='❌ Package name theek likhein, jaise com.app.demo'}
+if(step===4){if(S.sp==='image'&&!S.spi)return st.textContent='❌ Splash image chunein';if(S.sp==='video'&&!S.spv)return st.textContent='❌ Splash video chunein'}
+if(step<5){step++;return go()}
+if($('a_pin').checked&&!/^\d{4,8}$/.test($('pin').value))return st.textContent='❌ PIN 4 se 8 number ka rakhein';
+$('nx').disabled=true;try{await build();st.textContent='';$('dn').textContent=S.cur.name+' · '+Math.round(S.cur.bytes.length/1024)+' KB';$('res').style.display='block';$('nx').style.display='none';$('res').scrollIntoView({behavior:'smooth'})}catch(e){st.textContent='❌ Error: '+(e.message||e)}$('nx').disabled=false};
+$('dl').onclick=()=>S.cur&&save(S.cur.name,S.cur.bytes);$('inst').onclick=()=>{if(S.cur){save(S.cur.name,S.cur.bytes);alert('Download hone ke baad notification par tap karke Install dabayein.')}};
+if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
